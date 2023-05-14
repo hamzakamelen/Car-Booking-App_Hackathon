@@ -1,0 +1,74 @@
+.cards{
+display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    row-gap: 30px;
+    padding: 20px 10px;
+}
+.cards img{
+    border-radius: 20px;
+    width: 100% !important;
+    height: 250px !important;
+}
+.card-body{
+    width: 100% !important;
+}
+.btn{
+    width: 100% !important;
+}
+.CardDetails{
+    color: white;
+ background-color: rgb(33, 33, 229);
+    display: flex;
+    width: 100%;
+    height: 550px;
+    margin-top: 2%;
+    padding: 10px;   
+}
+.CardDetailsIMG{
+    width: 1700px !important;
+}
+.CardDetailsIMG img{
+    border-radius: 20px;
+    width: 94% !important;
+    height: 600px !important;
+    margin-top: -3%;
+}
+.CardDetailbody{
+    font-family: 'Courier New', Courier, monospace !important;
+}
+.description{
+    font-size: 20px !important;
+    
+}
+.btndetail{
+    width: 95% !important;
+    background-color: rgb(20, 238, 35) !important;
+    color: black !important;
+    font-weight: bolder !important;
+    border-radius: 12px !important;
+
+}
+.btndetaild {
+    width: 95% !important;
+    background-color: rgb(238, 20, 20) !important;
+    color: black !important;
+    font-weight: bolder !important;
+    border-radius: 12px !important;
+
+}
+.BookDetails{
+        display: flex;
+        width: 100%;
+        margin-top: 2%;
+        padding: 10px;
+}
+.BookDetailsIMG{
+    width: 1000px !important;
+}
+.BookDetailsIMG img{
+    border-radius: 20px;
+        width: 90% !important;
+        height: 400px !important;
+        margin-top: -3%;
+}

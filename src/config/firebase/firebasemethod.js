@@ -5,12 +5,12 @@ import {
   } from "firebase/auth";
   import { getDatabase, set, ref, onValue, push } from "firebase/database";
 
-  import app from "./FirebaseSetup";
+  import app from "./firebaseconfig";
   
   const auth = getAuth(app);
   const db = getDatabase(app);
   
-  let SignupUser = (obj) => {
+let SignupUser = (obj) => {
     return new Promise((resolve, reject) => {
       createUserWithEmailAndPassword(auth, obj.email, obj.password)
         .then((res) => {
@@ -49,48 +49,48 @@ import {
         });
     });
   };
-  let GetData = () => {};
-  let GetDataById = (nodeName) => {
-    return new Promise( (resolve,reject) =>{
-      let refer = ref(db,`${nodeName}/`)
-      onValue(refer, (dt) =>{
-          if(dt.exists()){
-              let a  = Object.values(dt.val()) 
-              // console.log(dt.val())
-              resolve(a)
-          }
-      })
-  })                                    
-  };
-  let PostDataById = (nodeName,obj) => {
-    return new Promise( (resolve,reject) =>{
-      let refer = ref(db,`${nodeName}/`)
-      obj.id  = push(refer).key
+  // let GetData = () => {};
+  // let GetDataById = (nodeName) => {
+  //   return new Promise( (resolve,reject) =>{
+  //     let refer = ref(db,`${nodeName}/`)
+  //     onValue(refer, (dt) =>{
+  //         if(dt.exists()){
+  //             let a  = Object.values(dt.val()) 
+  //             // console.log(dt.val())
+  //             resolve(a)
+  //         }
+  //     })
+  // })                                    
+  // };
+  // let PostDataById = (nodeName,obj) => {
+  //   return new Promise( (resolve,reject) =>{
+  //     let refer = ref(db,`${nodeName}/`)
+  //     obj.id  = push(refer).key
 
-      const referenc = ref(db,`${nodeName}/${obj.id}`)
-      set(referenc,obj)
-      .then((succ) =>{
-          resolve("data send successfully")
-      })
-      .catch((err) =>{
-          reject(err.message)
-      })
-  })
-  };
-  let EditData = () => {};
-  let DeleteData = () => {};
-  let DeleteUserAll = () => {};
+  //     const referenc = ref(db,`${nodeName}/${obj.id}`)
+  //     set(referenc,obj)
+  //     .then((succ) =>{
+  //         resolve("data send successfully")
+  //     })
+  //     .catch((err) =>{
+  //         reject(err.message)
+  //     })
+  // })
+  // };
+  // let EditData = () => {};
+  // let DeleteData = () => {};
+  // let DeleteUserAll = () => {};
    
   
   export {
     SignupUser,
     loginUser,
-    GetData,
-    GetDataById,
-    PostDataById,
-    EditData,
-    DeleteData,
-    DeleteUserAll,
+    // GetData,
+    // GetDataById,
+    // PostDataById,
+    // EditData,
+    // DeleteData,
+    // DeleteUserAll,
   };
 
 
