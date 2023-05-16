@@ -1,54 +1,54 @@
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-  } from "firebase/auth";
-  import { getDatabase, set, ref, onValue, push } from "firebase/database";
+// import {
+//     getAuth,
+//     createUserWithEmailAndPassword,
+//     signInWithEmailAndPassword,
+//   } from "firebase/auth";
+//   import { getDatabase, set, ref, onValue, push } from "firebase/database";
 
-  import app from "./firebaseconfig";
+//   import app from "./firebaseconfig";
   
-  const auth = getAuth(app);
-  const db = getDatabase(app);
+//   const auth = getAuth(app);
+//   const db = getDatabase(app);
   
-let SignupUser = (obj) => {
-    return new Promise((resolve, reject) => {
-      createUserWithEmailAndPassword(auth, obj.email, obj.password)
-        .then((res) => {
-          obj.id = res.user.uid;
-          const reference = ref(db, `users/${obj.id}`);
-          set(reference, obj)
-            .then(() => {
-              resolve("Data Send Successfully in Database and User Created");
-            })
-            .catch((err) => {
-              reject(err.message);
-            });
-        })
-        .catch((err) => {
-          reject(err.message);
-        });
-    });
-  };
+// let SignupUser = (obj) => {
+//     return new Promise((resolve, reject) => {
+//       createUserWithEmailAndPassword(auth, obj.email, obj.password)
+//         .then((res) => {
+//           obj.id = res.user.uid;
+//           const reference = ref(db, `users/${obj.id}`);
+//           set(reference, obj)
+//             .then(() => {
+//               resolve("Data Send Successfully in Database and User Created");
+//             })
+//             .catch((err) => {
+//               reject(err.message);
+//             });
+//         })
+//         .catch((err) => {
+//           reject(err.message);
+//         });
+//     });
+//   };
 
 
-  let loginUser = (obj) => {
-    return new Promise((resolve, reject) => {
-      signInWithEmailAndPassword(auth, obj.email, obj.password)
-        .then((res) => {
-          const reference = ref(db, `users/${res.user.uid}`);
-          onValue(reference, (data) => {
-            if (data.exists()) {
-              resolve(data.val());
-            } else {
-              reject("Data Not Found :(");
-            }
-          });
-        })
-        .catch((err) => {
-          reject(err.message);
-        });
-    });
-  };
+//   let loginUser = (obj) => {
+//     return new Promise((resolve, reject) => {
+//       signInWithEmailAndPassword(auth, obj.email, obj.password)
+//         .then((res) => {
+//           const reference = ref(db, `users/${res.user.uid}`);
+//           onValue(reference, (data) => {
+//             if (data.exists()) {
+//               resolve(data.val());
+//             } else {
+//               reject("Data Not Found :(");
+//             }
+//           });
+//         })
+//         .catch((err) => {
+//           reject(err.message);
+//         });
+//     });
+//   };
   // let GetData = () => {};
   // let GetDataById = (nodeName) => {
   //   return new Promise( (resolve,reject) =>{
@@ -82,16 +82,16 @@ let SignupUser = (obj) => {
   // let DeleteUserAll = () => {};
    
   
-  export {
-    SignupUser,
-    loginUser,
+  // export {
+  //   SignupUser,
+  //   loginUser,
     // GetData,
     // GetDataById,
     // PostDataById,
     // EditData,
     // DeleteData,
     // DeleteUserAll,
-  };
+  // };
 
 
   //   import { getDatabase, ref, set, push, onValue, update, remove } from "firebase/database";
@@ -207,62 +207,62 @@ let SignupUser = (obj) => {
 //     updateData,
 //     DeleteDataFromDataBase
 // // }
-// import app from './firebaseconfig';
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-// import { getDatabase, ref, set, onValue } from "firebase/database";
+import app from './firebaseconfig';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 
-// const auth = getAuth(app);
-// const database = getDatabase(app);
+const auth = getAuth(app);
+const database = getDatabase(app);
 
-// let Signupuser = (obj) => {
-//     return new Promise((resolve, reject) => {
-//         let { email, password, userName } = obj;
-//         createUserWithEmailAndPassword(auth, email, password)
-//             .then((userCredential) => {
-//                 // User Successfully Registered in Authentication
-//                 const user = userCredential.user;
-//                 const refrence = ref(database, `users/${user.uid}`)
-//                 obj.id = user.uid;
-//                 console.log(obj)
-//                 set(refrence, obj)
-//                     .then(() => {
-//                         resolve("User Created Successfully")
-//                     }).catch((errr) => {
-//                         reject(errr);
-//                     })
-//             })
-//             .catch((err) => {
-//                 reject(err);
-//             })
-//     })
-// };
+let Signupuser = (obj) => {
+    return new Promise((resolve, reject) => {
+        let { email, password, userName } = obj;
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // User Successfully Registered in Authentication
+                const user = userCredential.user;
+                const refrence = ref(database, `users/${user.uid}`)
+                obj.id = user.uid;
+                console.log(obj)
+                set(refrence, obj)
+                    .then(() => {
+                        resolve("User Created Successfully")
+                    }).catch((errr) => {
+                        reject(errr);
+                    })
+            })
+            .catch((err) => {
+                reject(err);
+            })
+    })
+};
 
-// let LoginUser = (obj) => {
-//     let { email, password } = obj;
-//     return new Promise((resolve, reject) => {
-//         signInWithEmailAndPassword(auth, email, password)
-//             .then((userCredential) => {
-//                 // Signed in 
-//                 const user = userCredential.user;
-//                 // ...
-//                 const reference = ref(database, `users/${user.uid}`);
-//                 onValue(reference, (e) => {
-//                     let status = e.exists();
-//                     console.log(status)
-//                     if (status) {
-//                         resolve(e.val());
-//                     }
-//                     else {
-//                         reject('Data Not Found');
-//                     }
-//                 });
-//             })
-//             .catch((error) => {
-//                 const errorMessage = error.message;
-//                 // alert(errorMessage);
-//                 reject(errorMessage);
-//             });
-//     });
-// };
+let LoginUser = (obj) => {
+    let { email, password } = obj;
+    return new Promise((resolve, reject) => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+                const reference = ref(database, `users/${user.uid}`);
+                onValue(reference, (e) => {
+                    let status = e.exists();
+                    console.log(status)
+                    if (status) {
+                        resolve(e.val());
+                    }
+                    else {
+                        reject('Data Not Found');
+                    }
+                });
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                // alert(errorMessage);
+                reject(errorMessage);
+            });
+    });
+};
 
-// export { Signupuser, LoginUser, database };
+export { Signupuser, LoginUser, database };

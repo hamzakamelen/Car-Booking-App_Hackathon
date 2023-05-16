@@ -1,10 +1,9 @@
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import MarkunreadIcon from '@mui/icons-material/Markunread';
-import HzForm from '../components/HzForm';
 import { TextField, Typography, InputAdornment , Box , Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { loginUser } from '../config/firebase/firebasemethod';
+import { LoginUser } from '../config/firebase/firebasemethod';
 function Login(){
 
     const navigate = useNavigate();
@@ -24,13 +23,13 @@ let obj = {
     password
 }
     let login = () => {
-        loginUser(obj)
+        LoginUser(obj)
             .then((success) => {
                 console.log(success)
                 navigate("/Home")
             })
             .catch((err) => {
-                alert(err);
+                console.log(err);
             })
     }
     return(

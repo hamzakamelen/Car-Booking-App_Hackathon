@@ -8,7 +8,7 @@ import {
   FormLabel, InputAdornment, InputLabel,
   MenuItem, Radio, RadioGroup, Select, TextField, Typography , Box
 } from "@mui/material";
-import { SignupUser } from '../config/firebase/firebasemethod';
+import { Signupuser } from '../config/firebase/firebasemethod';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -55,7 +55,7 @@ const Signup = () => {
   }
   const signUp = ()=>{
 
-    SignupUser(obj)
+    Signupuser(obj)
     .then((success) => {
       // Signed in 
       console.log(success)
@@ -63,7 +63,7 @@ const Signup = () => {
     })
     .catch((error) => {
       const errorMessage = error.message;
-      console.log(error)
+      console.log(errorMessage)
     });
   }
   return (
